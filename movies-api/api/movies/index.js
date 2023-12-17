@@ -1,11 +1,13 @@
 import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import express from 'express';
+import {getMovies} from '../tmdb-api';
 import {getUpcomingMovies} from '../tmdb-api';
 import {getGenres} from '../tmdb-api';
 
 const router = express.Router();
 
+/*
 router.get('/', asyncHandler(async (req, res) => {
     let { page = 1, limit = 10 } = req.query; // destructure page and limit and set default values
     [page, limit] = [+page, +limit]; //trick to convert to numeric (req.query will contain string values)
@@ -26,6 +28,7 @@ router.get('/', asyncHandler(async (req, res) => {
     };
     res.status(200).json(returnObject);
 }));
+*/
 
 // Get movie details
 router.get('/:id', asyncHandler(async (req, res) => {
@@ -36,6 +39,11 @@ router.get('/:id', asyncHandler(async (req, res) => {
     } else {
         res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
     }
+}));
+
+router.get('/', asyncHandler(async (req, res) => { //Discover
+    const discoverMovies = await getMovies();
+    res.status(200).json(discoverMovies);
 }));
 
 router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {

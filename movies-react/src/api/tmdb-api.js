@@ -1,4 +1,4 @@
-export const getMovies = () => {
+/*export const getMovies = () => {
   
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -15,6 +15,19 @@ export const getMovies = () => {
   .catch((error) => {
      throw error
   });
+}; */ //Old
+
+export const getMovies = async () => {
+  const response = await fetch(
+    'http://localhost:8080/api/movies/discover', {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  )
+  console.log("API Reponse right")
+  console.log(response);
+  return response.json();
 };
   
 export const getMovie = (args) => {
@@ -220,3 +233,28 @@ export const getMovie = (args) => {
        throw error
     });
   };
+
+  export const login = async (username, password) => {
+    const response = await fetch('http://localhost:8080/api/users', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ username: username, password: password })
+    });
+    console.log("App tmdb-api login->");
+    console.log(response);
+    return response.json();
+};
+
+export const signup = async (username, password) => {
+    const response = await fetch('http://localhost:8080/api/users?action=register', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ username: username, password: password })
+    });
+    console.log("Registration");
+    return response.json();
+};

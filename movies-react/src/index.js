@@ -20,6 +20,9 @@ import WatchLaterMoviesPage from "./pages/watchLaterMoviesPage";
 import FavoriteTVShowsPage from "./pages/favoriteTVShowsPage";
 import SearchPage from "./pages/searchMoviesPage";
 import { Search } from "@mui/icons-material";
+import LoginPage from "./pages/loginPage";
+import SignUpPage from "./pages/signUpPage";
+import AuthContextProvider from "./contexts/authContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +49,8 @@ const App = () => {
           <Route path="*" element={ <Navigate to="/" /> } />
           <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
           
+
+          
           <Route exact path="/movies/popular" element={<PopularMoviesPage />} />
           <Route exact path="/movies/top_rated" element={<TopRatedMoviesPage />} />
           <Route exact path="/tv/discover" element={<DiscoverTVPage />} />
@@ -53,9 +58,15 @@ const App = () => {
           <Route exact path="/movies/mustWatches" element={<WatchLaterMoviesPage />} />
           <Route exact path="/tv/favorites" element={<FavoriteTVShowsPage />} />
           <Route exact path="/search" element={<SearchPage />}/>
+
+          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/signup" element={<SignUpPage />} />
+
+
      
         </Routes>
       </MoviesContextProvider>
+
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
