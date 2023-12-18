@@ -4,6 +4,8 @@ import express from 'express';
 import {getMovies} from '../tmdb-api';
 import {getUpcomingMovies} from '../tmdb-api';
 import {getGenres} from '../tmdb-api';
+import {getPopularMovies} from '../tmdb-api';
+import {getMovie} from '../tmdb-api';
 
 const router = express.Router();
 
@@ -32,8 +34,16 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // Get movie details
 router.get('/:id', asyncHandler(async (req, res) => {
+    //console.log("Datamining.");
+    //console.log(req);
     const id = parseInt(req.params.id);
-    const movie = await movieModel.findByMovieDBId(id);
+    //const movie = await movieModel.findByMovieDBId(id);
+    //console.log("Id information");
+    //console.log(id);
+    
+    const movie = await getMovie(id);
+    //console.log(movie);
+
     if (movie) {
         res.status(200).json(movie);
     } else {
@@ -43,6 +53,11 @@ router.get('/:id', asyncHandler(async (req, res) => {
 
 router.get('/', asyncHandler(async (req, res) => { //Discover
     const discoverMovies = await getMovies();
+    res.status(200).json(discoverMovies);
+}));
+
+router.get('/tmdb/popular', asyncHandler(async (req, res) => { //I was going to change it to /MyApi/popular, but decided against.
+    const discoverMovies = await getPopularMovies();
     res.status(200).json(discoverMovies);
 }));
 

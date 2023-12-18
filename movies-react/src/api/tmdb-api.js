@@ -19,7 +19,7 @@
 
 export const getMovies = async () => {
   const response = await fetch(
-    'http://localhost:8080/api/movies/discover', {
+    'http://localhost:8080/api/movies/', {
     headers: {
       'Authorization': window.localStorage.getItem('token')
     }
@@ -35,7 +35,7 @@ export const getMovie = (args) => {
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `http://localhost:8080/api/movies/${id}`
   ).then((response) => {
     if (!response.ok) {
       console.log("API function response");
@@ -53,9 +53,7 @@ export const getMovie = (args) => {
   
   export const getGenres = async () => {
     return fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-        process.env.REACT_APP_TMDB_KEY +
-        "&language=en-US"
+      `http://localhost:8080/api/movies/tmdb/genres/`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -97,7 +95,7 @@ export const getMovie = (args) => {
 
   export const getUpcomingMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `http://localhost:8080/api/movies/tmdb/upcoming/`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -112,7 +110,7 @@ export const getMovie = (args) => {
   //Assignment
   export const getPopularMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `http://localhost:8080/api/movies/tmdb/popular/`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
