@@ -1,22 +1,3 @@
-/*export const getMovies = () => {
-  
-  return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
-  ).then((response) => {
-    if (!response.ok) {
-
-      console.log("API Failed");
-      throw new Error(response.json().message);
-    }    
-    console.log("API Finished");
-
-    return response.json();
-  })
-  .catch((error) => {
-     throw error
-  });
-}; */ //Old
-
 export const getMovies = async () => {
   const response = await fetch(
     'http://localhost:8080/api/movies/', {
@@ -124,7 +105,7 @@ export const getMovie = (args) => {
 
   export const getAllTimeHighestRatedMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `http://localhost:8080/api/movies/tmdb/alltimegreatest`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -136,26 +117,25 @@ export const getMovie = (args) => {
     });
   };
 
-  export const getTVShows = () => {
-    return fetch(
-      ` https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
-    ).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
+
+  export const getTVShows = async () => {
+    const response = await fetch(
+      `http://localhost:8080/api/television`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
       }
-      return response.json();
-    })
-    .catch((error) => {
-       throw error
-    });
+    }
+    )
+    console.log("API Reponse right")
+    console.log(response);
+    return response.json();
   };
 
   export const getTVShow = (args) => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
-    ).then((response) => {
+      `http://localhost:8080/api/television/${id}`    ).then((response) => {
       if (!response.ok) {
         throw new Error(`error retrieving tv show details ${response.status}`);
       }

@@ -10,15 +10,6 @@ const contentValidation = (body) => {
     let name = body.username;
     let pass = body.password;
 
-    /*
-    if(name == null){
-        return false;
-    }
-
-    if(pass == null){
-        return false;   
-    }*/
-
     if(name == null || pass == null) return false;
     return true;
 }

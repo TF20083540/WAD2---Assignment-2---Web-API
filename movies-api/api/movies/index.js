@@ -6,6 +6,7 @@ import {getUpcomingMovies} from '../tmdb-api';
 import {getGenres} from '../tmdb-api';
 import {getPopularMovies} from '../tmdb-api';
 import {getMovie} from '../tmdb-api';
+import {getAllTimeGreatestMovies} from '../tmdb-api';
 
 const router = express.Router();
 
@@ -69,6 +70,11 @@ router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {
 router.get('/tmdb/genres', asyncHandler(async (req, res) => {
     const contentGenres = await getGenres();
     res.status(200).json(contentGenres);
+}));
+
+router.get('/tmdb/alltimegreatest', asyncHandler(async (req, res) => {
+    const allTimeGreatestMovies = await getAllTimeGreatestMovies();
+    res.status(200).json(allTimeGreatestMovies);
 }));
 
 export default router;
