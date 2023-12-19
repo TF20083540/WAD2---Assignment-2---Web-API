@@ -19,11 +19,13 @@ const passwordValidation = (password) => {
     return regEx.test(password);
 }
 
-// Get all users
+// Get all users //THIS SHOULD NOT BE POSSIBLE IN A RETAIL APP. And taking security into consideration, just as good practice, has been commented out.
+/*
 router.get('/', async (req, res) => {
     const users = await User.find();
     res.status(200).json(users);
 });
+*/ //If I later have trouble with something regarding accounts, check this again.
 
 // register(Create)/Authenticate User
 router.post('/', asyncHandler(async (req, res) => {
