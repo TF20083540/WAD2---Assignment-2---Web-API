@@ -1,36 +1,34 @@
-export const getMovies = async () => {
-  const response = await fetch(
-    'http://localhost:8080/api/movies/', {
-    headers: {
-      'Authorization': window.localStorage.getItem('token')
+  export const getMovies = async () => {
+    const response = await fetch(
+      'http://localhost:8080/api/movies/', {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
     }
-  }
-  )
-  console.log("API Reponse right")
-  console.log(response);
-  return response.json();
-};
-  
-export const getMovie = (args) => {
-  console.log(args)
-  const [, idPart] = args.queryKey;
-  const { id } = idPart;
-  return fetch(
-    `http://localhost:8080/api/movies/${id}`
-  ).then((response) => {
-    if (!response.ok) {
-      console.log("API function response");
-
-
-      throw new Error(response.json().message);
-    }
-
+    )
+    console.log("API Reponse right")
+    console.log(response);
     return response.json();
-  })
-  .catch((error) => {
-    throw error
- });
-};
+  };
+  
+  export const getMovie = (args) => {
+    console.log(args)
+    const [, idPart] = args.queryKey;
+    const { id } = idPart;
+    return fetch(
+      `http://localhost:8080/api/movies/${id}`
+    ).then((response) => {
+      if (!response.ok) {
+        console.log("API function response");
+        throw new Error(response.json().message);
+      }
+
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+  });
+  };
   
   export const getGenres = async () => {
     return fetch(
@@ -47,10 +45,11 @@ export const getMovie = (args) => {
   };
   
   export const getMovieImages = ({ queryKey }) => {
+    console.log("getMovieImages");
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movieimages/${id}`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -63,9 +62,11 @@ export const getMovie = (args) => {
    });
   };
 
+  
+
   export const getMovieReviews = (id) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/moviereviews/${id}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -150,7 +151,7 @@ export const getMovie = (args) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/tv/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/television/tmdb/tvimages/${id}`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -169,7 +170,7 @@ export const getMovie = (args) => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/television/tmdb/tvcredits/${id}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -185,7 +186,7 @@ export const getMovie = (args) => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/moviecredits/${id}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -200,7 +201,6 @@ export const getMovie = (args) => {
   export const getSearchMoviesResults = (query) => {  
     return fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&query=${query}&include_adult=false&language=en-US&page=1`
-      //`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -210,6 +210,17 @@ export const getMovie = (args) => {
     .catch((error) => {
        throw error
     });
+  };
+
+  export const getTVReviews = (id) => {
+    return fetch(
+      `http://localhost:8080/api/television/tmdb/tvreviews/${id}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log(json.results);
+        return json.results;
+      });
   };
 
   export const login = async (username, password) => {
@@ -223,16 +234,16 @@ export const getMovie = (args) => {
     console.log("App tmdb-api login->");
     console.log(response);
     return response.json();
-};
+  };
 
-export const signup = async (username, password) => {
-    const response = await fetch('http://localhost:8080/api/users?action=register', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'post',
-        body: JSON.stringify({ username: username, password: password })
-    });
-    console.log("Registration");
-    return response.json();
-};
+  export const signup = async (username, password) => {
+      const response = await fetch('http://localhost:8080/api/users?action=register', {
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          method: 'post',
+          body: JSON.stringify({ username: username, password: password })
+      });
+      console.log("Registration");
+      return response.json();
+  };

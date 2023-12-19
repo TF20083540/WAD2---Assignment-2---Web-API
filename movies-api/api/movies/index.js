@@ -7,6 +7,9 @@ import {getGenres} from '../tmdb-api';
 import {getPopularMovies} from '../tmdb-api';
 import {getMovie} from '../tmdb-api';
 import {getAllTimeGreatestMovies} from '../tmdb-api';
+import {getMovieCredits} from '../tmdb-api';
+import {getMovieImages} from '../tmdb-api';
+import {getMovieReviews} from '../tmdb-api';
 
 const router = express.Router();
 
@@ -58,8 +61,8 @@ router.get('/', asyncHandler(async (req, res) => { //Discover
 }));
 
 router.get('/tmdb/popular', asyncHandler(async (req, res) => { //I was going to change it to /MyApi/popular, but decided against.
-    const discoverMovies = await getPopularMovies();
-    res.status(200).json(discoverMovies);
+    const popularMovies = await getPopularMovies();
+    res.status(200).json(popularMovies);
 }));
 
 router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {
@@ -75,6 +78,40 @@ router.get('/tmdb/genres', asyncHandler(async (req, res) => {
 router.get('/tmdb/alltimegreatest', asyncHandler(async (req, res) => {
     const allTimeGreatestMovies = await getAllTimeGreatestMovies();
     res.status(200).json(allTimeGreatestMovies);
+}));
+
+router.get('/tmdb/moviecredits/:id', asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const movieCredits = await getMovieCredits(id);
+
+
+    if (movieCredits) {
+        res.status(200).json(movieCredits);
+    } else {
+        res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/movieimages/:id', asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const movieImages = await getMovieImages(id);
+
+    if (movieImages) {
+        res.status(200).json(movieImages);
+    } else {
+        res.status(404).json({message: 'The movie images you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/moviereviews/:id', asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const movieImages = await getMovieReviews(id);
+
+    if (movieImages) {
+        res.status(200).json(movieImages);
+    } else {
+        res.status(404).json({message: 'The movie reviews you requested could not be found.', status_code: 404});
+    }
 }));
 
 export default router;

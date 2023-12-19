@@ -1,122 +1,163 @@
 import { response } from 'express';
 import fetch from 'node-fetch';
 
-export const getMovies = async () => {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-        );
-
-        if (!response.ok) {
-            throw new Error(response.json().message);
-        }
-
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
-
-
-
-export const getMovie = async (args) => {
-    
-    //console.log("1");
-    //console.log(args);
-    //const [, idPart] = args.queryKey;
-    //console.log("2");
-    //const { id } = args; //This line does not work? id = undefined when referenced this way. Object contains nothing bar the id itself.
-    //console.log("id is "+id);
-    //console.log("3");
-    try {
-        //console.log("4A");
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${args}?api_key=${process.env.TMDB_KEY}`
+    export const getMovies = async () => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
             );
 
-        //console.log("5A");
-        //console.log(response);
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
 
-        if (!response.ok) {
-            throw new Error(response.json().message);
+            return await response.json();
+        } catch (error) {
+            throw error;
         }
+    };
 
-        return await response.json();
-    } catch (error) {
-        //console.log(error);
-        throw error;
 
-    }
-};
 
-export const getPopularMovies = async () => {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-        );
+    export const getMovie = async (args) => {
+        //I understand why the api was crashing. it was already unpacked.
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/${args}?api_key=${process.env.TMDB_KEY}`
+                );
 
-        if (!response.ok) {
-            throw new Error(response.json().message);
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+
         }
+    };
 
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
+    export const getPopularMovies = async () => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+            );
 
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
 
-
-
-export const getUpcomingMovies = async () => {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-        );
-
-        if (!response.ok) {
-            throw new Error(response.json().message);
+            return await response.json();
+        } catch (error) {
+            throw error;
         }
+    };
 
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
 
-export const getGenres = async () => {
-    try {
-        const response = await fetch(
-            "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-            process.env.TMDB_KEY +
-            "&language=en-US"
-        );
-        
-        if (!response.ok) {
-            throw new Error(response.json().message);
+
+
+    export const getUpcomingMovies = async () => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+            );
+
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
         }
+    };
 
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
+    export const getGenres = async () => {
+        try {
+            const response = await fetch(
+                "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
+                process.env.TMDB_KEY +
+                "&language=en-US"
+            );
+            
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
 
-export const getAllTimeGreatestMovies = async () => {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-        );
-
-        if (!response.ok) {
-            throw new Error(response.json().message);
+            return await response.json();
+        } catch (error) {
+            throw error;
         }
+    };
 
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
+    export const getAllTimeGreatestMovies = async () => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+            );
+
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    export const getMovieCredits = async (id) => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_KEY}`
+            );
+
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    };
+
+
+    export const getMovieImages = async (id) => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.TMDB_KEY}`
+
+            );
+
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    };
+
+
+    export const getMovieReviews = async (id) => {
+        try {
+            const response = await fetch(
+                `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
+
+            );
+
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    };
+
 
 //TV Section
 export const getTVShows = async () => {
@@ -137,22 +178,10 @@ export const getTVShows = async () => {
 };
 
 export const getTVShow = async (args) => {
-    
-    //console.log("1");
-    //console.log(args);
-    //const [, idPart] = args.queryKey;
-    //console.log("2");
-    //const { id } = args; //This line does not work? id = undefined when referenced this way. Object contains nothing bar the id itself.
-    //console.log("id is "+id);
-    //console.log("3");
     try {
-        //console.log("4A");
         const response = await fetch(
             `https://api.themoviedb.org/3/tv/${args}?api_key=${process.env.TMDB_KEY}&include_adult=false`
             );
-
-        //console.log("5A");
-        //console.log(response);
 
         if (!response.ok) {
             throw new Error(response.json().message);
@@ -160,8 +189,58 @@ export const getTVShow = async (args) => {
 
         return await response.json();
     } catch (error) {
-        //console.log(error);
         throw error;
 
     }
 };
+
+export const getTVCredits = async (id) => {
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.TMDB_KEY}`
+        );
+
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getTVImages = async (id) => {
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/tv/${id}/images?api_key=${process.env.TMDB_KEY}`
+
+        );
+
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getTVReviews = async (id) => {
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${process.env.TMDB_KEY}`
+
+        );
+
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
