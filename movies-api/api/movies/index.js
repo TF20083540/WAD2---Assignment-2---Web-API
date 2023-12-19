@@ -10,6 +10,7 @@ import {getAllTimeGreatestMovies} from '../tmdb-api';
 import {getMovieCredits} from '../tmdb-api';
 import {getMovieImages} from '../tmdb-api';
 import {getMovieReviews} from '../tmdb-api';
+import {getSearchMovie} from '../tmdb-api';
 
 const router = express.Router();
 
@@ -113,5 +114,19 @@ router.get('/tmdb/moviereviews/:id', asyncHandler(async (req, res) => {
         res.status(404).json({message: 'The movie reviews you requested could not be found.', status_code: 404});
     }
 }));
+
+router.get('/tmdb/search/:id', asyncHandler(async (req, res) => {
+    console.log(req);
+
+    const id =  req.params.id;
+    const searchResults = await getSearchMovie(id);
+
+    if (searchResults) {
+        res.status(200).json(searchResults);
+    } else {
+        res.status(404).json({message: 'A movie matching your description could not be found.', status_code: 404});
+    }
+}));
+
 
 export default router;

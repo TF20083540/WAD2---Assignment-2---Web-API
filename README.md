@@ -34,10 +34,23 @@ ______________________
 ## API Design
 Give an overview of your web API design, perhaps similar to the following: 
 
+
 - /api/movies | GET | Gets a list of movies 
 - /api/movies/{movieid} | GET | Gets a single movie 
 - /api/movies/{movieid}/reviews | GET | Get all reviews for movie 
 - /api/movies/{movieid}/reviews | POST | Create a new review for Movie 
+
+//Mine
+- /api/user functions such as register and login work correctly. Currently as seperate pages.
+
+- /api/movies | GET | Gets a list of movies from the movie Discovery link.
+- /api/movies/{id} | GET | Gets a movies details via movie Id.
+- /api/movies/tmdb/popular | GET | Gets a list of movies from the popular movies tmdb link.
+- /api/movies/tmdb/upcoming |GET | Gets a list of movies from the upcoming (cinema) movies tmdb link.
+- /api/movies/tmdb/genres | GET | Gets a list of genre types from tmdb.
+
+- /api/television/ | GET | Gets a list of tv shows from the television Discovery link.
+- /api/television | GET | Gets the television shows details via the tv show Id.
 
 If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
 

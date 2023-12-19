@@ -200,8 +200,7 @@
 
   export const getSearchMoviesResults = (query) => {  
     return fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&query=${query}&include_adult=false&language=en-US&page=1`
-    ).then((response) => {
+      `http://localhost:8080/api/movies/tmdb/search/${query}`    ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
       }    
