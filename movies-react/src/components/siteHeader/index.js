@@ -17,10 +17,48 @@ const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorE2, setAnchorE2] = useState(null);
+  const [anchorE3, setAnchorE3] = useState(null);
+
   const open = Boolean(anchorEl);
+  const tvOpen = Boolean(anchorE2);
+  const userOpen = Boolean(anchorE3);
+
+
+  //Movies
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  //TV
+
+  const handleClickTV = (event) => {
+    setAnchorE2(event.currentTarget);
+  };
+  const handleCloseTV = () => {
+    setAnchorE2(null);
+  };
+
+
+
+  //Users
+  const handleClickUser = (event) => {
+    setAnchorE3(event.currentTarget);
+  };
+  const handleCloseUser = () => {
+    setAnchorE3(null);
+  };
+
+
+
+  //const open = Boolean(anchorEl);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   
   const navigate = useNavigate();
 
@@ -38,6 +76,10 @@ const SiteHeader = ({ history }) => {
     { label: "Signup", path: "/signup" },
 
   ];
+
+
+
+
 
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
@@ -59,6 +101,9 @@ const SiteHeader = ({ history }) => {
           </Typography>
             {isMobile ? (
               <>
+                
+              {/*Mobile Movies Menu*/}
+
                 <IconButton
                   aria-label="menu"
                   aria-controls="menu-appbar"
@@ -95,15 +140,112 @@ const SiteHeader = ({ history }) => {
               </>
             ) : (
               <>
-                {menuOptions.map((opt) => (
+
+              {/*None-Mobile Menu*/}
+              
+              {/*Movies Menu */}
+
+                <div>
                   <Button
-                    key={opt.label}
-                    color="inherit"
-                    onClick={() => handleMenuSelect(opt.path)}
+                    id="moviesButton"
+                    aria-controls={open ? 'moviesMenu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    
                   >
-                    {opt.label}
+                    Movies
                   </Button>
-                ))}
+                  <Menu
+                    id="moviesMenu"
+                    aria-labelledby="moviesButton"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <MenuItem id="movieItem1" onClick={() => handleMenuSelect("/")}> Discover Movies</MenuItem>
+                    <MenuItem id="movieItem2" onClick={() => handleMenuSelect("/movies/upcoming/")} > Upcoming Movies</MenuItem>
+                    <MenuItem id="movieItem3" onClick={() => handleMenuSelect("/movies/popular/")} > Popular Moviess</MenuItem>
+                    <MenuItem id="movieItem4" onClick={() => handleMenuSelect("/movies/top_rated/")} > All Time Greatest Movies</MenuItem>
+                  </Menu>
+                </div>
+
+                
+              {/*TV Menu */}
+
+              <div>
+                  <Button
+                    id="tvButton"
+                    aria-controls={tvOpen ? 'tvMenu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={tvOpen ? 'true' : undefined}
+                    onClick={handleClickTV}
+                  >
+                    TV Shows
+                  </Button>
+                  <Menu
+                    id="tvMenu"
+                    aria-labelledby="tvButton"
+                    anchorE2={anchorE2}
+                    open={tvOpen}
+                    onClose={handleCloseTV}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <MenuItem id="tvItem1" onClick={() => handleMenuSelect("/tv/discover")}> Discover TV Shows</MenuItem>
+                    <MenuItem id="tvItem2"> *NEW FEATURE*</MenuItem>
+
+                  </Menu>
+                </div>
+
+                
+              {/*User Menu */}
+
+              <div>
+                  <Button
+                    id="userButton"
+                    aria-controls={userOpen ? 'userMenu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={userOpen ? 'true' : undefined}
+                    onClick={handleClickUser}
+                  >
+                    User
+                  </Button>
+                  <Menu
+                    id="userMenu"
+                    aria-labelledby="userButton"
+                    anchorE3={anchorE3}
+                    open={userOpen}
+                    onClose={handleCloseUser}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <MenuItem id="userItem1" onClick={() => handleMenuSelect("/login/")}> Login</MenuItem>
+                    <MenuItem id="userItem2" onClick={() => handleMenuSelect("/signup/")} > Register</MenuItem>
+                  </Menu>
+                </div>
+
+
               </>
             )}
         </Toolbar>

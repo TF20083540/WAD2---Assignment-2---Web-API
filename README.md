@@ -34,7 +34,7 @@ ______________________
 ## API Design
 Give an overview of your web API design, perhaps similar to the following: 
 
-+ /api/user functions such as register and login work correctly. Currently as seperate pages. Uses queries to decide what to do instead of seperate paths.
++ /api/user | POST | Functions such as register and login work correctly. Currently as seperate pages. Uses queries to decide what to do instead of seperate paths.
 
 + /api/movies/ | GET | Gets a list of movies from the movie Discovery link.
 + /api/movies/{id} | GET | Gets a movies details via movie Id.
