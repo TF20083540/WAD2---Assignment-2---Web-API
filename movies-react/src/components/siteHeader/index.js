@@ -91,13 +91,13 @@ const SiteHeader = ({ history }) => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" color="secondary" style={{ background: '#0033AA' }}>
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
-            TMDB Client
+            20083540's Media Application
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            All you ever wanted to know about Movies!
+            All you ever wanted to know about Movies... and television!
           </Typography>
             {isMobile ? (
               <>
@@ -152,8 +152,12 @@ const SiteHeader = ({ history }) => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
-                    
-                  >
+                    sx={{
+                      color: "white",
+                      border: "2px solid #ffffff"
+                    }}
+
+                    >
                     Movies
                   </Button>
                   <Menu
@@ -175,6 +179,8 @@ const SiteHeader = ({ history }) => {
                     <MenuItem id="movieItem2" onClick={() => handleMenuSelect("/movies/upcoming/")} > Upcoming Movies</MenuItem>
                     <MenuItem id="movieItem3" onClick={() => handleMenuSelect("/movies/popular/")} > Popular Moviess</MenuItem>
                     <MenuItem id="movieItem4" onClick={() => handleMenuSelect("/movies/top_rated/")} > All Time Greatest Movies</MenuItem>
+                    <MenuItem id="movieItem5" onClick={() => handleMenuSelect("/movies/search/")} > Search Movies</MenuItem>
+
                   </Menu>
                 </div>
 
@@ -188,6 +194,11 @@ const SiteHeader = ({ history }) => {
                     aria-haspopup="true"
                     aria-expanded={tvOpen ? 'true' : undefined}
                     onClick={handleClickTV}
+                    sx={{
+                      color: "white",
+                      border: "2px solid #ffffff"
+                    }}
+
                   >
                     TV Shows
                   </Button>
@@ -222,6 +233,11 @@ const SiteHeader = ({ history }) => {
                     aria-haspopup="true"
                     aria-expanded={userOpen ? 'true' : undefined}
                     onClick={handleClickUser}
+                    sx={{
+                      color: "white",
+                      border: "2px solid #ffffff"
+                    }}
+
                   >
                     User
                   </Button>
@@ -242,6 +258,9 @@ const SiteHeader = ({ history }) => {
                   >
                     <MenuItem id="userItem1" onClick={() => handleMenuSelect("/login/")}> Login</MenuItem>
                     <MenuItem id="userItem2" onClick={() => handleMenuSelect("/signup/")} > Register</MenuItem>
+                    <MenuItem id="userItem3" onClick={() => handleMenuSelect("/movies/favorites")} > Favourite Movies</MenuItem>
+                    <MenuItem id="userItem4" onClick={() => handleMenuSelect("/movies/mustWatches")} > Saved Movies</MenuItem>
+                    <MenuItem id="userItem5" onClick={() => handleMenuSelect("/tv/favorites")} > Favourite TV Shows</MenuItem>
                   </Menu>
                 </div>
 

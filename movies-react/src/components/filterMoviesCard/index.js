@@ -53,13 +53,15 @@ export default function FilterMoviesCard(props) {
   return (
     <Card 
       sx={{
-        maxWidth: 345,
-        backgroundColor: "rgb(204, 204, 0)"
+        maxWidth: 400,
+        backgroundColor: "rgb(200, 0, 50)"
       }} 
       variant="outlined">
       <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
+        <Typography variant="h5" component="h1" sx={{
+        color: "rgb(255, 255, 255)"
+      }}>
+          <SearchIcon fontSize="large"/>
           Filter the movies.
         </Typography>
         <TextField
@@ -71,8 +73,18 @@ export default function FilterMoviesCard(props) {
       value={props.titleFilter}
       onChange={handleTextChange}
     />
+
+      <InputLabel id="genre-label" sx={{
+        color: "rgb(255, 255, 255)",
+      }}  >
+        Genre
+      </InputLabel>
+
         <FormControl sx={{...formControl}}>
-          <InputLabel id="genre-label">Genre</InputLabel>
+
+
+
+
           <Select
     labelId="genre-label"
     id="genre-select"
@@ -96,7 +108,9 @@ export default function FilterMoviesCard(props) {
         title="Filter"
       />
       <CardContent>
-        <Typography variant="h5" component="h1">
+        <Typography variant="h5" component="h1" sx={{
+        color: "rgb(255, 255, 255)"
+      }}>
           <SearchIcon fontSize="large" />
           Filter the movies.
           <br />

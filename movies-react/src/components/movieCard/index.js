@@ -45,7 +45,7 @@ export default function MovieCard({movie, action}) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 300, maxHeight: 600, backgroundColor: "grey"}}>
       <CardHeader
         avatar={
           movie.favorite ? (
@@ -61,7 +61,7 @@ export default function MovieCard({movie, action}) {
         }
       />
       <CardMedia
-        sx={{ height: 500 }}
+        sx={{ height: 300 }}
         image={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -69,25 +69,29 @@ export default function MovieCard({movie, action}) {
         }
       />
       <CardContent>
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
+        <Grid container spacing={1} >
+          <Grid item xs={6} >
+            <Grid item xs={6} >
               <MovieIcon fontSize="small" />
-              {movie.release_date}
-            </Typography>
+               {movie.release_date} {" "}
+            </Grid>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
-            </Typography>
+            <Grid item xs={6}>
+              <StarRateIcon fontSize="small" variant="h6"/>
+              {"  "} {movie.vote_average}              
+            </Grid>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
         {action(movie)}
         <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
+          <Button variant="outlined" size="medium" color="primary" sx={{
+        color: "rgb(255, 255, 255)",
+        border: "2px solid #ffffff"
+
+      }}>
             More Info ...
           </Button>
         </Link>
