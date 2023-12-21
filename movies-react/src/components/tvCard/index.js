@@ -45,7 +45,7 @@ export default function TVCard({tvShow, action}) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 350, maxHeight: 600, backgroundColor: "grey" }}>
       <CardHeader
         avatar={
           tvShow.favorite ? (
@@ -61,7 +61,7 @@ export default function TVCard({tvShow, action}) {
         }
       />
       <CardMedia
-        sx={{ height: 500 }}
+        sx={{ height: 300 }}
         image={
           tvShow.poster_path
             ? `https://image.tmdb.org/t/p/w500/${tvShow.poster_path}`
@@ -69,25 +69,26 @@ export default function TVCard({tvShow, action}) {
         }
       />
       <CardContent>
-        <Grid container>
+        <Grid container spacing={1}>
           <Grid item xs={6}>
-            <Typography variant="h6" component="p">
+            <Grid item xs={6}>
               <TVIcon fontSize="small" />
-              {tvShow.first_air_date}
-            </Typography>
+              {tvShow.first_air_date}              
+            </Grid>
+           </Grid>       
+           <Grid item xs={6}>
+            <Grid item xs={6}>
+              <StarRateIcon fontSize="small"  variant="h6" />
+              {"  "} {tvShow.vote_average}{" "}              
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {"  "} {tvShow.vote_average}{" "}
-            </Typography>
-          </Grid>
+
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
         {action(tvShow)}
         <Link to={`/tv/${tvShow.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
+          <Button variant="outlined" size="medium" color="primary" sx={{color: "rgb(255, 255, 255)", border: "2px solid #ffffff"}}>
             More Info ...
           </Button>
         </Link>

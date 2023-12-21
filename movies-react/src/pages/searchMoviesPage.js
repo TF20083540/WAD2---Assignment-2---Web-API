@@ -54,9 +54,17 @@ const SearchMoviesPage = (props) => {
   return (
     <>
 
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={searchTerm} onChange={handleChange} />
-      <button type="submit">Search</button>
+    <form onSubmit={handleSubmit} style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+}}>
+      <input type="text" value={searchTerm} style={{
+        height:"50px", width:"300px", fontSize:"22px"
+        }} onChange={handleChange} />
+      <button type="submit" style={{
+        height:"50px", width:"100px"
+        }}>Search</button>
     </form>
 
 
@@ -67,7 +75,12 @@ const SearchMoviesPage = (props) => {
         return <AddToFavoritesIcon movie={movie} />
       }}
     />
-      : <p>Nothing to display</p>
+      : <p style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize:"22px"
+    }}>Please search for content</p>
     }
 
     </>

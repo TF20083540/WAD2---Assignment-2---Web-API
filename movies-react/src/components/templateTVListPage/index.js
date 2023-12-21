@@ -27,7 +27,7 @@ function TVListPageTemplate({ movies: TVShows, title, action }) {
   };
 
   return (
-    <Grid container sx={{ padding: '20px' }}>
+    <Grid container sx={{ padding: '20px', backgroundColor: "black" }}>
       <Grid item xs={12}>
         <Header title={title} />
       </Grid>
