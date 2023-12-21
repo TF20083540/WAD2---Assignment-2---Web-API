@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { login, signup } from "../api/movies-api";
+import React, { useState, createContext } from "react";
+import { login, signup } from "../api/tmdb-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -8,6 +8,9 @@ const MoviesContextProvider = (props) => {
   const [mustWatches, setMustWatches] = useState([])
   const [myReviews, setMyReviews] = useState( {} );
   const [tvFavorites, setTVFavorites] = useState([])
+
+  //Auth
+  
 
   //Trying some stuff, remove if not working
   const existingToken = localStorage.getItem("token");

@@ -8,9 +8,14 @@ const AddToPlaylistIcon = ({ movie }) => {
   
   const context = useContext(MoviesContext);
 
+
   const handleAddToMustWatches = (e) => {
-    e.preventDefault();
-    context.addToMustWatches(movie);
+    if(context.isAuthenticated){
+      e.preventDefault();
+      context.addToMustWatches(movie);      
+    }
+
+
   };
   
 

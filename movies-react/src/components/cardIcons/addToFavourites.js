@@ -7,8 +7,13 @@ const AddToFavoritesIcon = ({ movie }) => {
   const context = useContext(MoviesContext);
 
   const handleAddToFavorites = (e) => {
-    e.preventDefault();
-    context.addToFavorites(movie);
+
+    if(context.isAuthenticated){
+      e.preventDefault();
+      context.addToFavorites(movie);      
+    }
+
+
   };
 
   return (

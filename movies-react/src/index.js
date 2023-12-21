@@ -23,6 +23,7 @@ import { Search } from "@mui/icons-material";
 import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signUpPage";
 import AuthContextProvider from "./contexts/authContext";
+import ProtectedRoutes from "./protectedRoutes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,7 +43,6 @@ const App = () => {
       <MoviesContextProvider>
         <Routes>
           <Route path ="/reviews/form" element={ <AddMovieReviewPage />} />
-          <Route exact path="/movies/favorites" element={<FavoriteMoviesPage />} />
           <Route path="/movies/:id" element={<MoviePage />} />
           <Route exact path="/movies/upcoming" element={<UpcomingMoviesPage />} />
           <Route path="/" element={<HomePage />} />
@@ -53,10 +53,15 @@ const App = () => {
           <Route exact path="/movies/top_rated" element={<TopRatedMoviesPage />} />
           <Route exact path="/tv/discover" element={<DiscoverTVPage />} />
           <Route path="/tv/:id" element={<TVPage />} />
-          <Route exact path="/movies/mustWatches" element={<WatchLaterMoviesPage />} />
-          <Route exact path="/tv/favorites" element={<FavoriteTVShowsPage />} />
+
           <Route exact path="/movies/search" element={<SearchPage />}/>
 
+          <Route element={<ProtectedRoutes />}>
+            <Route exact path="/user/moviefavorites" element={<FavoriteMoviesPage />} />
+            <Route exact path="/user/moviewatchlater" element={<WatchLaterMoviesPage />} />
+            <Route exact path="/user/tvfavorites" element={<FavoriteTVShowsPage />} />
+          </Route>
+          
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/signup" element={<SignUpPage />} />
 

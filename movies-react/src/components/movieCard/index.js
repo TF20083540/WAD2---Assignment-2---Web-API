@@ -20,6 +20,7 @@ export default function MovieCard({movie, action}) {
   const { favorites, addToFavorites } = useContext(MoviesContext);
   const { mustWatches, addToMustWatches} = useContext(MoviesContext);
 
+
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
   } else {
@@ -36,7 +37,7 @@ export default function MovieCard({movie, action}) {
  
   const handleAddToFavorite = (e) => {
     e.preventDefault();
-    addToFavorites(movie);
+    addToFavorites(movie);      
   };
 
   const handleAddToMustWatches = (e) => {

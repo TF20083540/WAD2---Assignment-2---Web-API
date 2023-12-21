@@ -258,9 +258,9 @@ const SiteHeader = ({ history }) => {
                   >
                     <MenuItem id="userItem1" onClick={() => handleMenuSelect("/login/")}> Login</MenuItem>
                     <MenuItem id="userItem2" onClick={() => handleMenuSelect("/signup/")} > Register</MenuItem>
-                    <MenuItem id="userItem3" onClick={() => handleMenuSelect("/movies/favorites")} > Favourite Movies</MenuItem>
-                    <MenuItem id="userItem4" onClick={() => handleMenuSelect("/movies/mustWatches")} > Saved Movies</MenuItem>
-                    <MenuItem id="userItem5" onClick={() => handleMenuSelect("/tv/favorites")} > Favourite TV Shows</MenuItem>
+                    <MenuItem id="userItem3" onClick={() => handleMenuSelect("/user/moviefavorites")} > Favourite Movies</MenuItem>
+                    <MenuItem id="userItem4" onClick={() => handleMenuSelect("/user/moviewatchlater")} > Saved Movies</MenuItem>
+                    <MenuItem id="userItem5" onClick={() => handleMenuSelect("/user/tvfavorites")} > Favourite TV Shows</MenuItem>
                   </Menu>
                 </div>
 

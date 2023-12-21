@@ -7,8 +7,11 @@ const AddToTVFavoritesIcon = ({ movie: tvShow }) => {
   const context = useContext(MoviesContext);
 
   const handleAddToTVFavorites = (e) => {
-    e.preventDefault();
-    context.addToTVFavorites(tvShow);
+    if(context.isAuthenticated){
+      e.preventDefault();
+      context.addToTVFavorites(tvShow);      
+    }
+
   };
 
   return (
