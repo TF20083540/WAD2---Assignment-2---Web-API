@@ -34,15 +34,12 @@ const SiteHeader = ({ history }) => {
   };
 
   //TV
-
   const handleClickTV = (event) => {
     setAnchorE2(event.currentTarget);
   };
   const handleCloseTV = () => {
     setAnchorE2(null);
   };
-
-
 
   //Users
   const handleClickUser = (event) => {
@@ -218,7 +215,7 @@ const SiteHeader = ({ history }) => {
                     }}
                   >
                     <MenuItem id="tvItem1" onClick={() => handleMenuSelect("/tv/discover")}> Discover TV Shows</MenuItem>
-                    <MenuItem id="tvItem2"> *NEW FEATURE*</MenuItem>
+                    <MenuItem id="tvItem2" onClick={() => handleMenuSelect("/tv/search")}> Search TV Shows</MenuItem>
 
                   </Menu>
                 </div>

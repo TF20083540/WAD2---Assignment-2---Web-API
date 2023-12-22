@@ -115,7 +115,7 @@ router.get('/tmdb/moviereviews/:id', asyncHandler(async (req, res) => {
     }
 }));
 
-router.get('/tmdb/search/:id', asyncHandler(async (req, res) => {
+router.get('/tmdb/moviesearch/:id', asyncHandler(async (req, res) => {
     console.log(req);
 
     const id =  req.params.id;
@@ -127,6 +127,8 @@ router.get('/tmdb/search/:id', asyncHandler(async (req, res) => {
         res.status(404).json({message: 'A movie matching your description could not be found.', status_code: 404});
     }
 }));
+
+
 
 
 export default router;

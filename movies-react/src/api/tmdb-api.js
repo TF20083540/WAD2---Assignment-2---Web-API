@@ -200,7 +200,20 @@
 
   export const getSearchMoviesResults = (query) => {  
     return fetch(
-      `http://localhost:8080/api/movies/tmdb/search/${query}`    ).then((response) => {
+      `http://localhost:8080/api/movies/tmdb/moviesearch/${query}`    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }    
+      return response.json();
+    })
+    .catch((error) => {
+       throw error
+    });
+  };
+
+  export const getSearchTVResults = (query) => {  
+    return fetch(
+      `http://localhost:8080/api/television/tmdb/tvsearch/${query}`    ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
       }    

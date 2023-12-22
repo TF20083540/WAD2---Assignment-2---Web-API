@@ -5,6 +5,7 @@ import {getTVShow} from '../tmdb-api';
 import {getTVCredits} from '../tmdb-api';
 import {getTVImages} from '../tmdb-api';
 import {getTVReviews} from '../tmdb-api';
+import {getSearchTV} from '../tmdb-api';
 
 const router = express.Router();
 
@@ -56,6 +57,19 @@ router.get('/tmdb/tvreviews/:id', asyncHandler(async (req, res) => {
         res.status(200).json(tvReviews);
     } else {
         res.status(404).json({message: 'The tv show reviews you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/tvsearch/:id', asyncHandler(async (req, res) => {
+    console.log(req);
+
+    const id =  req.params.id;
+    const searchResults = await getSearchTV(id);
+
+    if (searchResults) {
+        res.status(200).json(searchResults);
+    } else {
+        res.status(404).json({message: 'A movie matching your description could not be found.', status_code: 404});
     }
 }));
 

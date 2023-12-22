@@ -18,7 +18,8 @@ import DiscoverTVPage from "./pages/tvDiscoverPage";
 import TVPage from "./pages/tvDetailsPage";
 import WatchLaterMoviesPage from "./pages/watchLaterMoviesPage";
 import FavoriteTVShowsPage from "./pages/favoriteTVShowsPage";
-import SearchPage from "./pages/searchMoviesPage";
+import MovieSearchPage from "./pages/searchMoviesPage";
+import TVSearchPage from "./pages/searchTVPage";
 import { Search } from "@mui/icons-material";
 import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signUpPage";
@@ -54,7 +55,8 @@ const App = () => {
           <Route exact path="/tv/discover" element={<DiscoverTVPage />} />
           <Route path="/tv/:id" element={<TVPage />} />
 
-          <Route exact path="/movies/search" element={<SearchPage />}/>
+          <Route exact path="/movies/search" element={<MovieSearchPage />}/>
+          <Route exact path="/tv/search" element={<TVSearchPage />}/>
 
           <Route element={<ProtectedRoutes />}>
             <Route exact path="/user/moviefavorites" element={<FavoriteMoviesPage />} />

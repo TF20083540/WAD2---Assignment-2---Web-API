@@ -1,72 +1,87 @@
-# Assignment 1 - ReactJS app.
+# Assignment 2 - Web API.
+Name: Thomas Farrell
+Student Number: 20083540
 
-Name: Thomas Farrell (20083540)
-
-## Overview.
-The app has been expanded from simply being a movie-display app to also being used to display TV shows. It also shows actors related to each aswell through a standardised actorCard. 
-
-### Features. 
-+ react-query enabled on all current pages.
-+ PersonIcon used on Actor Cards.
-+ Film Rel icon now used on Movie Cards.
-+ TV icon used on TV Show Cards.
-+ Both movies and tv show details page display actor cards, showing the cast of the production.
-+ Added Watch Later list to movies in the popular and all time pages.
-+ Multiple end points to view popular and all time pages.
-+ Added Favourite TV Show list and page with delete capability.
-+ UI seems to react to reshaping, but not sure if the end result is as expected.
-+ Added search function, now with a functional page!
-
+## Features.
+ + Added the ability to search for television shows.
 
 ## Setup requirements.
-1. Extract full package from .zip file.
-2. Open root folder with VSCode.
-3. cd into the movies folder.
-4. Run the program with "npm start".
+1) Run two terminals and cd into each "movies-react" and "movies-api" folders.
+2) Use "npm run dev" or "npm start" in the "movies-api" folder terminal window first.
+3) Once api is running, use "npm start" in the "movies-react" folder.
+4) Your default internet browser will open a new window, or a new tab if one is already open, and auto focus the window for you.
+5) Enjoy!
 
-## API endpoints.
-- Popular Movies Page - movies/popular
-    [^1]: Returns a list of currently popular movies.
-- Top Rated Movies Page - movies/top_rated
-    [^1]: Returns a list of the highest rated movies of all time.
-- DiscoverTVPage - discover/tv
-    [^1]: Returns a list of tv shows, chosen by TMDB.
-- TV Details Page - tv/${id}
-    [^1]: Returns information about a TV series.
-- TV Show Images - tv/${id}/images
-    [^1]: Returns images taken from a TV series.
-- TV Show Credits - tv/${id}/credits
-    [^1]: Returns a list of actors and actresses who worked on a TV series.
-- Movie Credits - movie/${id}/credits
-    [^1]: Returns a list of actors and Actresses who worked on a movie.
 
- 
-## Routing.
-- /movies/popular - displays currently popular movies.
-- /movies/top_rated - displays all time highest rated movies.
-- /tv/discover - find tv shows.
-- /tv/:id - displays a selected TV Show's details.
+## API Configuration
+______________________
+movies-api/.env{
+NODEENV=development
+PORT=8080
+HOST=localhost
+mongoDB=mongodb://127.0.0.1:27017/movies_db
+TMDB_Key ={YOUR TMDB API KEY HERE}
+secret=ilikecake
+}
+______________________
+movies-react/.env{
+REACT_APP_TMDB_KEY={YOUR TMDB API KEY HERE}
+FAST_REFRESH=false
+}
 
-## Material UI Icons.
-- Replaced CalenderIcon in MovieCard with "Theaters" icon.
-- Replaced CalenderIcon in TVCard with "Tv" icon.
-- Added "Person" icon to ActorCard.
 
-## Independent learning (If relevant).
+## API Design
++ /api/user | POST | Functions such as register and login work correctly. Currently as seperate pages. Uses queries to decide what to do instead of seperate paths.
 
-Itemize the technologies/techniques you researched independently and adopted in your project, 
-i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
-(we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).
++ /api/movies/ | GET | Gets a list of movies from the movie Discovery link.
++ /api/movies/{id} | GET | Gets a movies details via movie Id.
++ /api/movies/tmdb/popular | GET | Gets a list of movies from the popular movies tmdb link.
++ /api/movies/tmdb/upcoming |GET | Gets a list of movies from the upcoming (cinema) movies tmdb link.
++ /api/movies/tmdb/genres | GET | Gets a list of genre types from tmdb.
++ /api/movies/tmdb/reviews | GET | Gets a list of reviews for a movie from tmdb.
++ /api/movies/tmdb/alltimegreatest | GET | Gets a list of movies that are the highest rate in film history from tmdb.
++ /api/movies/tmdb/movieimages | GET | Gets images related to a movie from tmdb.
++ /api/movies/tmdb/moviecredits/{id} | GET | Gets the cast and character list for a movie from tmdb.
++ /api/movies/tmdb/moviesearch | GET | Gets a list of movies from tmdb, relevant to the user's search input query.
 
-Resources:
-- MaterialUI Icons: https://mui.com/material-ui/material-icons/
-    - Used for looking up visual components to differentiate similar-looking assets.
++ /api/television/ | GET | Gets a list of tv shows from the television Discovery link.
++ /api/television/{id} | GET | Gets the television shows details via the tv show Id.
++ /api/television/tmdb/tvimages/{id} | GET | Gets images related to a television show from tmdb.
++ /api/television/tmdb/tvsearch | GET | Gets a list of tv shows from tmdb, relevant to the user's search input query.
 
-- TMDB API documentation: https://developer.themoviedb.org/reference/intro/getting-started
-    - Used for looking up API calls for differing data.
 
-- Stack Overflow: https://stackoverflow.com/
-    - Generally used for looking up potential solutions to issues while working on the assignment. Didn't really come in handy.
+## Security and Authentication
+Removed the ability for the api to call a list of all users and to output their information. The passwords, when harvested, could be easily decrypted due to our current method (standard salting algorithm) via a Rainbow Table. This is dangerous and highly insecure.
 
-- Postman (App version): https://web.postman.co/
-    - Used for understanding data coming in from a TMDB-API call. VERY much came in handy!
+Removed the ability for the user to interact with the movie favourites, movieswatchlater and tvfavourites features. A neredowell might possibly exploit these features if theyed function correctly without being logged in.
+
+Protected routes
++ /user/moviefavourites
++ /user/moviewatchlater
++ /user/tvfavourites
+
+
+## Integrating with React App
+- All movie paths are currently unprotected and uses our Web Api.
+
+- All tv paths are currently unprotected and uses our web Api.
+
+- User login & registration paths are currently unprotected and uses our web Api.
+
+- User Favourites, Watch Later, and TV Favourites lists are currently locked down to only being able to be used while logged in, and uses our web Api.
+
+- User Favourites, Watch Later, and TVFavourites lists currently save at the app level only and are not permanent. Ran out of time to try to implement saving this to the db. If I were to implement this, i would have the lists loaded from the db at login into app memory and any time that a movie/tv show is added to one of the lists, the change would be saved in app memory first, and then uploaded to the db.
+
+- Changed some of the app's themeing colors at the component level to better understand how themes and colors work within react, and to better differentiate Assignment 2's app from Assignment 1's.
+
+- Tried to tidy up areas that looked a little funny. Still not perfect, but much cleaner.
+
+- Added my student number to the siteHeader.
+
+- Removed the large amount of options on the site header. Slimmed it down to 3 options, Movies, TV and User; each of which supply relevant options.
+
+
+## Independent learning (if relevant)
+- Used Postman to better understand how and what data is transfered back and forth. Extremely useful for ensuring that an issue is not on the api side.
+
+- Used MongoCompass. I almost always had this open to refresh. Though it wasn't used for managing data, it's a useful tool to ensure that any data I wish for the db to store was stored correctly.
